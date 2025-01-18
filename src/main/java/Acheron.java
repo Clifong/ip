@@ -6,6 +6,7 @@ import java.util.Objects;
 public class Acheron {
     private static ArrayList<Tasks> tasks = new ArrayList<>();
     public static void main(String[] args) {
+        BufferedReader reader;
 
         String logo = "____________________________________________________________\n"
                 + " Hello! I'm Acheron\n"
