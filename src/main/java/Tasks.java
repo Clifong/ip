@@ -1,4 +1,4 @@
-public class Tasks {
+public abstract class Tasks {
     private boolean done = false;
     private String name;
 
@@ -23,3 +23,4 @@ public class Tasks {
         this.done = false;
     }
 }
+

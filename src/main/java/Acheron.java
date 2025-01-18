@@ -56,8 +56,30 @@ public class Acheron {
                 }
                 System.out.println(genericText.formatted("Here are the tasks in your list:\n" + listOfTasks));
             } else {
-                System.out.println(genericText.formatted("added: " + input));
-                tasks.add(new Tasks(input));
+                Tasks newTask;
+                if (input.contains("todo")) {
+                    String taskName = input.substring(input.indexOf(' ') + 1, input.length());
+                    newTask = new ToDos(taskName);
+                } else if (input.contains("deadline")) {
+                    String taskWithDate = input.substring(input.indexOf(' ') + 1, input.length());
+                    String taskName = taskWithDate.substring(0, taskWithDate.indexOf("/by") - 1);
+                    String deadline = taskWithDate.substring(taskWithDate.indexOf("by") + 3, taskWithDate.length());
+                    newTask = new Deadlines(taskName, deadline);
+                } else {
+                    String taskWithDate = input.substring(input.indexOf(' ') + 1, input.length());
+                    String taskName = taskWithDate.substring(0, taskWithDate.indexOf("/from") - 1);
+                    String from = taskWithDate.substring(taskWithDate.indexOf("from") + 5, taskWithDate.indexOf("/to") - 1);
+                    String to = taskWithDate.substring(taskWithDate.indexOf("to") + 3, taskWithDate.length());
+                    newTask = new Events(taskName, from, to);
+                }
+                tasks.add(newTask);
+                System.out.println(genericText.formatted(
+                        "Got it. I've added this task:\n" +
+                                newTask +
+                                "\n" +
+                                "Now you have " + tasks.size() +" tasks in the list."
+                        )
+                );
             }
         }
     }
