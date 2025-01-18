@@ -1,9 +1,10 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Acheron {
-    private static ArrayList<String> tasks = new ArrayList<>();
+    private static ArrayList<Tasks> tasks = new ArrayList<>();
     public static void main(String[] args) {
 
         String logo = "____________________________________________________________\n"
@@ -27,6 +28,20 @@ public class Acheron {
             String genericText = "____________________________________________________________\n" +
                                  "%s\n" +
                                  "____________________________________________________________";
+
+            if (input.contains("mark")) {
+                String[] split = input.split(" ");
+                int num = Integer.parseInt(split[1]) - 1;
+                if (split[0].equals("unmark")) {
+                    tasks.get(num).unmark();
+                    System.out.println(genericText.formatted("OK, I've marked this task as not done yet:\n" + tasks.get(num)));
+                } else {
+                    tasks.get(num).mark();
+                    System.out.println(genericText.formatted("Nice! I've marked this task as done:\n" + tasks.get(num)));;
+                }
+                continue;
+            }
+
             if (input.equals("bye")) {
                 System.out.println(genericText.formatted("Bye. Hope to see you again soon!"));
                 break;
@@ -39,10 +54,10 @@ public class Acheron {
                         listOfTasks += String.format("%d. %s", i + 1, tasks.get(i));
                     }
                 }
-                System.out.println(genericText.formatted(listOfTasks));
+                System.out.println(genericText.formatted("Here are the tasks in your list:\n" + listOfTasks));
             } else {
                 System.out.println(genericText.formatted("added: " + input));
-                tasks.add(input);
+                tasks.add(new Tasks(input));
             }
         }
     }
