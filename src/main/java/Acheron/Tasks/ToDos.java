@@ -1,3 +1,7 @@
+package Acheron.Tasks;
+
+import Acheron.Tasks.Tasks;
+
 public class ToDos extends Tasks {
     public ToDos(String name, boolean done) {
         super(name, done);

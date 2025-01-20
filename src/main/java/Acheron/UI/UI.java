@@ -1,3 +1,5 @@
+package Acheron.UI;
+
 public class UI {
 
     private static String genericTask = "____________________________________________________________\n" +
@@ -5,7 +7,7 @@ public class UI {
                                  "____________________________________________________________";
 
     public UI() {
-        String logo = " Hello! I'm Acheron\n"
+        String logo = " Hello! I'm Acheron.Acheron\n"
                     + " What can I do for you?";
         displayText(logo);
     }

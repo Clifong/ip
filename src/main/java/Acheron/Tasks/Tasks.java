@@ -1,3 +1,5 @@
+package Acheron.Tasks;
+
 public abstract class Tasks {
     private boolean done;
     private String name;

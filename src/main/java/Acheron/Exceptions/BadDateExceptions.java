@@ -1,3 +1,5 @@
+package Acheron.Exceptions;
+
 public class BadDateExceptions extends Exceptions {
     @Override
     public String toString() {

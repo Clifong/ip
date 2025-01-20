@@ -1,3 +1,5 @@
+package Acheron.Exceptions;
+
 public class EventExceptions extends Exceptions {
     @Override
     public String toString() {

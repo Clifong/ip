@@ -1,17 +1,15 @@
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Objects;
+package Acheron;
+
+import Acheron.Storage.StorageManager;
+import Acheron.Tasks.TaskList;
+import Acheron.UI.UI;
+import Acheron.Utility.CommandParser;
 
 public class Acheron {
     private CommandParser commandParser;
     private StorageManager storageManager;
     private TaskList taskList;
-    private  UI ui;
+    private UI ui;
 
     public Acheron(String storagePath) {
         try {
