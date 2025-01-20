@@ -1,21 +1,23 @@
+import java.time.LocalDate;
+
 public class Events extends Tasks{
 
-    private String from;
-    private String to;
+    private LocalDate from;
+    private LocalDate to;
 
     public Events(String name, boolean done, String from, String to) {
         super(name, done);
-        this.from = from;
-        this.to = to;
+        this.from = LocalDate.parse(from);
+        this.to = LocalDate.parse(to);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        return "[E]" + super.toString() + " (from: " + DateFormatter.formatDate(from) + " to: " + DateFormatter.formatDate(to) + ")";
     }
 
     @Override
     public String saveTask(boolean last) {
-        return  "E" + super.saveTask(last) + "|" + this.from + "|" + this.to + (last ? "" : "\n");
+        return  "E" + super.saveTask(last) + "|" + from.toString() + "|" + to.toString() + (last ? "" : "\n");
     }
 }

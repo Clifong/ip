@@ -22,8 +22,12 @@ public class TaskWriter {
                 String taskWithDate = input.substring(input.indexOf(' ') + 1, input.length());
                 String taskName = taskWithDate.substring(0, taskWithDate.indexOf("/by") - 1);
                 String deadline = taskWithDate.substring(taskWithDate.indexOf("by") + 3, taskWithDate.length());
+                if (!dataValidator(deadline)) {
+                    throw new BadDateExceptions();
+                }
                 newTask = new Deadlines(taskName, false, deadline);
             } catch (Exception e) {
+                System.out.println(e);
                 throw new DeadlineExceptions();
             }
         } else if (input.contains("event")) {
@@ -32,6 +36,9 @@ public class TaskWriter {
                 String taskName = taskWithDate.substring(0, taskWithDate.indexOf("/from") - 1);
                 String from = taskWithDate.substring(taskWithDate.indexOf("from") + 5, taskWithDate.indexOf("/to") - 1);
                 String to = taskWithDate.substring(taskWithDate.indexOf("to") + 3, taskWithDate.length());
+                if (!dataValidator(from) || !dataValidator(to)) {
+                    throw new BadDateExceptions();
+                }
                 newTask = new Events(taskName, false, from, to);
             } catch (Exception e) {
                 throw new EventExceptions();
@@ -41,6 +48,20 @@ public class TaskWriter {
         }
         myTasks.add(newTask);
         return newTask;
+    }
+
+    private static boolean dataValidator(String date) {
+        if (!date.contains("-")) {
+            return false;
+        }
+        String[] split = date.split("-");
+        if (split.length != 3) {
+            return false;
+        }
+        if (split[0].length() != 4 || split[1].length() != 2 || split[2].length() != 2) {
+            return false;
+        }
+        return true;
     }
 
     public static void createSavedTask(String input, ArrayList<Tasks> myTasks) throws Exception {

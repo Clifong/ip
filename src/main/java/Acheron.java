@@ -15,8 +15,6 @@ public class Acheron {
         String logo = "____________________________________________________________\n"
                 + " Hello! I'm Acheron\n"
                 + " What can I do for you?\n"
-                + "____________________________________________________________\n"
-                + " Bye. Hope to see you again soon!\n"
                 + "____________________________________________________________";
 
         if (Files.notExists(Path.of("./data"))) {
