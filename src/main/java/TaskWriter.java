@@ -3,7 +3,7 @@ import java.util.Arrays;
 
 public class TaskWriter {
 
-    public static Tasks createTask(String input, ArrayList<Tasks> myTasks) throws Exception {
+    public static void createTask(String input,TaskList taskList) throws Exception {
         //Generic adding of tasls
         Tasks newTask = null;
         input = input.strip();
@@ -26,9 +26,11 @@ public class TaskWriter {
                     throw new BadDateExceptions();
                 }
                 newTask = new Deadlines(taskName, false, deadline);
-            } catch (Exception e) {
-                System.out.println(e);
-                throw new DeadlineExceptions();
+            } catch (BadDateExceptions e) {
+                throw e;
+            }
+            catch (Exception e) {
+                throw new EventExceptions();
             }
         } else if (input.contains("event")) {
             try {
@@ -40,14 +42,16 @@ public class TaskWriter {
                     throw new BadDateExceptions();
                 }
                 newTask = new Events(taskName, false, from, to);
-            } catch (Exception e) {
+            } catch (BadDateExceptions e) {
+                throw e;
+            }
+            catch (Exception e) {
                 throw new EventExceptions();
             }
         } else {
             throw new Exceptions();
         }
-        myTasks.add(newTask);
-        return newTask;
+        taskList.addTask(newTask);
     }
 
     private static boolean dataValidator(String date) {
@@ -64,20 +68,20 @@ public class TaskWriter {
         return true;
     }
 
-    public static void createSavedTask(String input, ArrayList<Tasks> myTasks) throws Exception {
+    public static void createSavedTask(String input, TaskList taskList) throws Exception {
         try {
             String[] split = input.split("\\|");
             boolean done = split[1].equals("X");
             String taskName = split[2];
             if (split[0].equals("T")) {
-                myTasks.add(new ToDos(taskName, done));
+                taskList.addTaskFromStorage(new ToDos(taskName, done));
             } else if (split[0].equals("D")) {
                 String by = split[3];
-                myTasks.add(new Deadlines(taskName, done, by));
+                taskList.addTaskFromStorage(new Deadlines(taskName, done, by));
             } else if (split[0].equals("E")) {
                 String from = split[3];
                 String to = split[4];
-                myTasks.add(new Events(taskName, done, from, to));
+                taskList.addTaskFromStorage(new Events(taskName, done, from, to));
             } else {
                 throw new CorruptedFileException();
             }
