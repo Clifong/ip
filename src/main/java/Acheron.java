@@ -1,6 +1,10 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 public class Acheron {
@@ -14,7 +18,32 @@ public class Acheron {
                 + "____________________________________________________________\n"
                 + " Bye. Hope to see you again soon!\n"
                 + "____________________________________________________________";
-        System.out.println("Hello from\n" + logo);
+
+        if (Files.notExists(Path.of("./data"))) {
+            new File("./data").mkdir();
+        } if (Files.notExists(Path.of("./data/duke.txt"))) {
+            Path file = Paths.get("./data/duke.txt");
+            try {
+                Files.createFile(file);
+            } catch (Exception e) {
+                System.out.println("Failed to create folder. Check you file permissions");
+                return;
+            }
+        }
+
+        try {
+            BufferedReader fileReader = new BufferedReader(new FileReader("./data/duke.txt"));
+            String line = fileReader.readLine();
+            while (line != null) {
+                TaskWriter.createSavedTask(line, tasks);
+                line = fileReader.readLine();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+            return;
+        }
+
+        System.out.println(logo);
 
         try {
             while (true) {
@@ -42,6 +71,7 @@ public class Acheron {
                         tasks.get(num).mark();
                         System.out.println(genericText.formatted("Nice! I've marked this task as done:\n" + tasks.get(num)));;
                     }
+                    updateSavedFile();
                     continue;
                 }
 
@@ -62,6 +92,7 @@ public class Acheron {
                         }
                     }
                     System.out.println(genericText.formatted("Here are the tasks in your list:\n" + listOfTasks));
+
                     continue;
                 }
 
@@ -78,57 +109,37 @@ public class Acheron {
                                                     "Now you have " + tasks.size() +" tasks in the list."
                             )
                     );
+                    updateSavedFile();
                     continue;
                 }
 
-                //Generic adding of tasls
-                Tasks newTask;
-                if (input.contains("todo")) {
-                    try {
-                        String taskName = input.substring(input.indexOf(' ') + 1, input.length());
-                        if (taskName.equals("todo")) {
-                            throw new ToDoExceptions();
-                        }
-                        newTask = new ToDos(taskName);
-                    } catch (Exception e) {
-                        System.out.println(new ToDoExceptions());
-                        continue;
-                    }
-                } else if (input.contains("deadline")) {
-                    try {
-                        String taskWithDate = input.substring(input.indexOf(' ') + 1, input.length());
-                        String taskName = taskWithDate.substring(0, taskWithDate.indexOf("/by") - 1);
-                        String deadline = taskWithDate.substring(taskWithDate.indexOf("by") + 3, taskWithDate.length());
-                        newTask = new Deadlines(taskName, deadline);
-                    } catch (Exception e) {
-                        System.out.println(new DeadlineExceptions());
-                        continue;
-                    }
-                } else if (input.contains("event")) {
-                    try {
-                        String taskWithDate = input.substring(input.indexOf(' ') + 1, input.length());
-                        String taskName = taskWithDate.substring(0, taskWithDate.indexOf("/from") - 1);
-                        String from = taskWithDate.substring(taskWithDate.indexOf("from") + 5, taskWithDate.indexOf("/to") - 1);
-                        String to = taskWithDate.substring(taskWithDate.indexOf("to") + 3, taskWithDate.length());
-                        newTask = new Events(taskName, from, to);
-                    } catch (Exception e) {
-                        System.out.println(new EventExceptions());
-                        continue;
-                    }
-                } else {
-                    throw new Exceptions();
-                }
-                tasks.add(newTask);
+                Tasks newTask = TaskWriter.createTask(input, tasks);
                 System.out.println(genericText.formatted(
-                        "Got it. I've added this task:\n" +
-                                newTask +
-                                "\n" +
-                                "Now you have " + tasks.size() +" tasks in the list."
+                                "Got it. I've added this task:\n" +
+                                        newTask +
+                                        "\n" +
+                                        "Now you have " + tasks.size() +" tasks in the list."
                         )
                 );
+                updateSavedFile();
             }
         } catch (Exception e) {
-            System.out.println(new Exceptions());
+            System.out.println(e);
+        }
+    }
+
+    public static void updateSavedFile() throws Exception {
+        try {
+            BufferedWriter fileWriter = new BufferedWriter(new FileWriter("./data/duke.txt", false));
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < tasks.size(); i++) {
+                String savedContent = tasks.get(i).saveTask(i == tasks.size() - 1);
+                stringBuilder.append(savedContent);
+            }
+            fileWriter.write(stringBuilder.toString());
+            fileWriter.close();
+        } catch (Exception e) {
+            throw e;
         }
     }
 }

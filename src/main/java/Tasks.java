@@ -1,9 +1,10 @@
 public abstract class Tasks {
-    private boolean done = false;
+    private boolean done;
     private String name;
 
-    public Tasks(String name) {
+    public Tasks(String name, boolean done) {
         this.name = name;
+        this.done = done;
     }
     @Override
     public String toString() {
@@ -22,5 +23,13 @@ public abstract class Tasks {
     public void unmark() {
         this.done = false;
     }
+
+    public String saveTask(boolean last) {
+        if (done) {
+            return "|" + "X" + "|" + name;
+        } else {
+            return "|" + "O" + "|" + name;
+        }
+    };
 }
 
