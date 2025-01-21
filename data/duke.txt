@@ -1,2 +1,1 @@
-T|O|null
-T|O|null
+T|O|fight

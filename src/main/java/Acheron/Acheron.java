@@ -1,5 +1,4 @@
 package Acheron;
-
 import Acheron.Storage.StorageManager;
 import Acheron.Tasks.TaskList;
 import Acheron.UI.UI;
