@@ -64,4 +64,22 @@ public class TaskList {
         }
         return stringBuilder.toString();
     }
+
+    public void findAllTaskWithKeyword(String keyword) {
+        ArrayList<Tasks> rightTask = new ArrayList<>();
+        for (Tasks task : this.tasks) {
+            if (task.containsKeyword(keyword)) {
+                rightTask.add(task);
+            }
+        }
+        String listOfTasks = "";
+        for (int i = 0; i < rightTask.size(); i++) {
+            if (i < rightTask.size() - 1) {
+                listOfTasks += String.format("%d. %s\n", i + 1, rightTask.get(i));
+            } else {
+                listOfTasks += String.format("%d. %s", i + 1, rightTask.get(i));
+            }
+        }
+        UI.displayText("Here are the matching tasks in your list:\n" + listOfTasks);
+    }
 }
