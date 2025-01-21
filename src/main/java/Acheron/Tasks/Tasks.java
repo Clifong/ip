@@ -65,5 +65,9 @@ public abstract class Tasks {
             return "|" + "O" + "|" + name;
         }
     };
+
+    public boolean containsKeyword(String keyword) {
+        return this.name.contains(keyword);
+    }
 }
 

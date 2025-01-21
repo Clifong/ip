@@ -44,6 +44,14 @@ public class CommandParser {
                     continue;
                 }
 
+                //Finding
+                if (input.contains("find")) {
+                    int space = input.indexOf(" ");
+                    String keyword = input.substring(space + 1);
+                    taskList.findAllTaskWithKeyword(keyword);
+                    continue;
+                }
+
                 //Bye
                 if (input.equals("bye")) {
                     UI.displayText("Bye. Hope to see you again soon!");
