@@ -2,8 +2,18 @@ package Acheron.Tasks;
 
 import Acheron.Exceptions.*;
 
+/**
+ * A class that does work to extract the required information out of any input
+ * pertaining to the creatioon of any task
+ */
 public class TaskWriter {
 
+    /**
+     * Creates a task
+     * @param input The text input by the user
+     * @param taskList The task list object
+     * @throws Exception Throws any errors that occur in some of the usbmethods
+     */
     public static void createTask(String input,TaskList taskList) throws Exception {
         //Generic adding of tasls
         Tasks newTask = null;
@@ -55,6 +65,11 @@ public class TaskWriter {
         taskList.addTask(newTask);
     }
 
+    /**
+     * A utility method to check if the date in the input is correctly formatted
+     * @param date A date we are checking
+     * @return True if the date is correctly formatted. Otherwise false
+     */
     private static boolean dataValidator(String date) {
         if (!date.contains("-")) {
             return false;
@@ -69,6 +84,12 @@ public class TaskWriter {
         return true;
     }
 
+    /**
+     * A method to create a task from the saved file
+     * @param input A text from the saved file
+     * @param taskList A task list object
+     * @throws Exception Throws any errors that occur in some of the usbmethods
+     */
     public static void createSavedTask(String input, TaskList taskList) throws Exception {
         try {
             String[] split = input.split("\\|");

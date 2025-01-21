@@ -2,10 +2,20 @@ package Acheron.Tasks;
 
 import Acheron.Exceptions.TaskExceptions;
 
+/**
+ * Abstratc class for all tasks which contain the minimal fields and methods
+ * subclass habe
+ */
 public abstract class Tasks {
     private boolean done;
     private String name;
 
+    /**
+     * A constructor for the Tasks class
+     * @param name Te name of the task
+     * @param done Whether the tasks is done or not. Required when generating tasks from the saved file
+     * @throws TaskExceptions An error if invalid input is fed into the constructor
+     */
     public Tasks(String name, boolean done) throws TaskExceptions {
         if (name == null) {
             throw new TaskExceptions();
@@ -13,6 +23,11 @@ public abstract class Tasks {
         this.name = name;
         this.done = done;
     }
+
+    /**
+     Overrides the to string method with a custom version
+     * @return A string format of the task object
+     */
     @Override
     public String toString() {
         if (done) {
@@ -23,14 +38,26 @@ public abstract class Tasks {
         }
     }
 
+    /**
+     * A method to mark that a task is done
+     */
     public void mark() {
         this.done = true;
     }
 
+    /**
+     * A method to unmark an already done task
+     */
     public void unmark() {
         this.done = false;
     }
 
+    /**
+     * Used to generate the string content of the task for saving
+     * @param last Indicates if the task is the last task in the task list object. Needed so the
+     *             file writer does not add an unecessary new line which can cause file corruption
+     * @return The content of the task
+     */
     public String saveTask(boolean last) {
         if (done) {
             return "|" + "X" + "|" + name;

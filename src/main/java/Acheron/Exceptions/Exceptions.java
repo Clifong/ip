@@ -1,5 +1,9 @@
 package Acheron.Exceptions;
 
+/**
+ * This exception is thrown if an input is wrongly formatted or incomplete
+ * when trying to create a deadline task
+ */
 public class Exceptions extends Exception {
     @Override
     public String toString() {

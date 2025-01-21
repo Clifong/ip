@@ -8,9 +8,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * The storage manager class is responsible for handling anything pertaining to
+ * changing or reading from the saved file. It also created the required folder and file
+ */
 public class StorageManager {
     private String storagePath;
 
+    /**
+     * Constructor for the storage manager
+     * @param storagePath The path where the saved file is saved to
+     * @param taskList The task list object which will be populated with task from the saved file if any
+     * @throws Exception Trhow an exception related to wrongly provided path or other exceptions
+     */
     public StorageManager(String storagePath, TaskList taskList) throws Exception {
         this.storagePath = storagePath;
 
@@ -41,6 +51,11 @@ public class StorageManager {
     }
 
 
+    /**
+     * Update the saved file with all the existing task's contents
+     * @param taskList The task list object contains all existing tasks
+     * @throws Exception Throws any exception picked up in any sub methods
+     */
     public void updateSavedFile(TaskList taskList) throws Exception {
         try {
             BufferedWriter fileWriter = new BufferedWriter(new FileWriter(this.storagePath, false));

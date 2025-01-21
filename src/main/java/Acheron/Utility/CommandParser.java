@@ -8,8 +8,16 @@ import Acheron.UI.UI;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+/**
+ * A utility class used to parse the user's input correctly
+ */
 public class CommandParser {
 
+    /**
+     * A constructor of the class
+     * @param storageManager A storage manager instace
+     * @param taskList A task list instance
+     */
     public CommandParser(StorageManager storageManager, TaskList taskList) {
 
         try {
@@ -44,7 +52,7 @@ public class CommandParser {
 
                 //list
                 if (input.equals("list")) {
-                    taskList.listAllTasks();
+                    UI.displayText(taskList.toString());
                     continue;
                 }
 
