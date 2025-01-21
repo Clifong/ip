@@ -7,8 +7,6 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Tasks> tasks = new ArrayList<>();
 
-    public TaskList() {}
-
     public void addTask(Tasks task) {
         addTaskFromStorage(task);
         UI.displayText("Got it. I've added this task:\n" +

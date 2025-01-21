@@ -3,29 +3,37 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskWriterTest {
+    static final String TODOEMPTYSPACEERROR = "Check your to do input.\n" +
+            "Make sure the text follows the format\n" +
+            "todo [Some text]\n" +
+            "(Note that the [ ] is not needed! E.g todo eat peach";
+    static final String TODOEMPTYERROR = "Check your to do input.\n" +
+            "Make sure the text follows the format\n" +
+            "todo [Some text]\n" +
+            "(Note that the [ ] is not needed! E.g todo eat peach";
+    static final String DEADLINEWRONGGFORMATERROR = "Date is wrongly formatted!" +
+            "Make sure it follows the YYYY-MM-DD format";
+    static final String DEADLINEWRONGLENGTHBUTRIGHTFORMATERROR = "Date is wrongly" +
+            "formatted! Make sure it follows the YYYY-MM-DD format";
+    static final String EVENTWRONGERROR = "Date is wrongly" +
+            "formatted! Make sure it follows the YYYY-MM-DD format";
+    static final String CORRUPTEDFILEERROR = "Corrupted file. Cannot read data";
+
     @Test
     public void TaskWriterTodoEmptySpace(){
-        String error = "Check your to do input.\n" +
-                "Make sure the text follows the format\n" +
-                "todo [Some text]\n" +
-                "(Note that the [ ] is not needed! E.g todo eat peach";
         try {
             TaskWriter.createTask("todo ", new TaskList());
         } catch (Exception e) {
-            assertEquals(error, e.toString());
+            assertEquals(TODOEMPTYSPACEERROR, e.toString());
         }
     }
 
     @Test
     public void TaskWriterTodoEmpty(){
-        String error = "Check your to do input.\n" +
-                "Make sure the text follows the format\n" +
-                "todo [Some text]\n" +
-                "(Note that the [ ] is not needed! E.g todo eat peach";
         try {
             TaskWriter.createTask("todo", new TaskList());
         } catch (Exception e) {
-            assertEquals(error, e.toString());
+            assertEquals(TODOEMPTYERROR, e.toString());
         }
     }
 
@@ -34,7 +42,7 @@ public class TaskWriterTest {
         try {
             TaskWriter.createTask("deadline b /by 2019/02/12", new TaskList());
         } catch (Exception e) {
-            assertEquals("Date is wrongly formatted! Make sure it follows the YYYY-MM-DD format", e.toString());
+            assertEquals(DEADLINEWRONGGFORMATERROR, e.toString());
         }
     }
 
@@ -43,7 +51,7 @@ public class TaskWriterTest {
         try {
             TaskWriter.createTask("deadline b /by 2019-02-1", new TaskList());
         } catch (Exception e) {
-            assertEquals("Date is wrongly formatted! Make sure it follows the YYYY-MM-DD format", e.toString());
+            assertEquals(DEADLINEWRONGLENGTHBUTRIGHTFORMATERROR, e.toString());
         }
     }
 
@@ -52,7 +60,7 @@ public class TaskWriterTest {
         try {
             TaskWriter.createTask("deadline b /by 2019-02-1", new TaskList());
         } catch (Exception e) {
-            assertEquals("Date is wrongly formatted! Make sure it follows the YYYY-MM-DD format", e.toString());
+            assertEquals(EVENTWRONGERROR, e.toString());
         }
     }
 
@@ -61,7 +69,7 @@ public class TaskWriterTest {
         try {
             TaskWriter.createSavedTask("todo ", new TaskList());
         } catch (Exception e) {
-            assertEquals("Corrupted file. Cannot read data", e.toString());
+            assertEquals(CORRUPTEDFILEERROR, e.toString());
         }
     }
 
@@ -70,7 +78,7 @@ public class TaskWriterTest {
         try {
             TaskWriter.createSavedTask("todo", new TaskList());
         } catch (Exception e) {
-            assertEquals("Corrupted file. Cannot read data", e.toString());
+            assertEquals(CORRUPTEDFILEERROR, e.toString());
         }
     }
 
@@ -79,7 +87,7 @@ public class TaskWriterTest {
         try {
             TaskWriter.createSavedTask("deadline b /by 2019/02/12", new TaskList());
         } catch (Exception e) {
-            assertEquals("Corrupted file. Cannot read data", e.toString());
+            assertEquals(CORRUPTEDFILEERROR, e.toString());
         }
     }
 
@@ -88,7 +96,7 @@ public class TaskWriterTest {
         try {
             TaskWriter.createSavedTask("deadline b /by 2019-02-1", new TaskList());
         } catch (Exception e) {
-            assertEquals("Corrupted file. Cannot read data", e.toString());
+            assertEquals(CORRUPTEDFILEERROR, e.toString());
         }
     }
 
@@ -97,7 +105,7 @@ public class TaskWriterTest {
         try {
             TaskWriter.createSavedTask("deadline b /by 2019-02-1", new TaskList());
         } catch (Exception e) {
-            assertEquals("Corrupted file. Cannot read data", e.toString());
+            assertEquals(CORRUPTEDFILEERROR, e.toString());
         }
     }
 }
