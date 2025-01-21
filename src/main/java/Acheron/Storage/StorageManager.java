@@ -41,9 +41,9 @@ public class StorageManager {
     }
 
 
-    public static void updateSavedFile(TaskList taskList) throws Exception {
+    public void updateSavedFile(TaskList taskList) throws Exception {
         try {
-            BufferedWriter fileWriter = new BufferedWriter(new FileWriter("./data/duke.txt", false));
+            BufferedWriter fileWriter = new BufferedWriter(new FileWriter(this.storagePath, false));
             fileWriter.write(taskList.getAllTasksContent());
             fileWriter.close();
         } catch (Exception e) {

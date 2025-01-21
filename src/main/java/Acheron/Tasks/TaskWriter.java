@@ -87,7 +87,6 @@ public class TaskWriter {
                 throw new CorruptedFileException();
             }
         } catch (Exception e) {
-            System.out.println(e);
             throw new CorruptedFileException();
         }
     }

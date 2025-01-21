@@ -59,7 +59,7 @@ public class CommandParser {
 
                 //add task
                 TaskWriter.createTask(input, taskList);
-                StorageManager.updateSavedFile(taskList);
+                storageManager.updateSavedFile(taskList);
             }
         } catch (Exception e) {
             System.out.println(e);

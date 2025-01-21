@@ -1,9 +1,10 @@
 package Acheron.Tasks;
 
+import Acheron.Exceptions.TaskExceptions;
 import Acheron.Tasks.Tasks;
 
 public class ToDos extends Tasks {
-    public ToDos(String name, boolean done) {
+    public ToDos(String name, boolean done) throws TaskExceptions {
         super(name, done);
     }
 

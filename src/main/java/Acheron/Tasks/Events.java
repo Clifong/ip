@@ -1,5 +1,6 @@
 package Acheron.Tasks;
 
+import Acheron.Exceptions.TaskExceptions;
 import Acheron.Tasks.Tasks;
 import Acheron.Utility.DateFormatter;
 
@@ -10,7 +11,7 @@ public class Events extends Tasks {
     private LocalDate from;
     private LocalDate to;
 
-    public Events(String name, boolean done, String from, String to) {
+    public Events(String name, boolean done, String from, String to) throws TaskExceptions {
         super(name, done);
         this.from = LocalDate.parse(from);
         this.to = LocalDate.parse(to);

@@ -1,10 +1,15 @@
 package Acheron.Tasks;
 
+import Acheron.Exceptions.TaskExceptions;
+
 public abstract class Tasks {
     private boolean done;
     private String name;
 
-    public Tasks(String name, boolean done) {
+    public Tasks(String name, boolean done) throws TaskExceptions {
+        if (name == null) {
+            throw new TaskExceptions();
+        }
         this.name = name;
         this.done = done;
     }
