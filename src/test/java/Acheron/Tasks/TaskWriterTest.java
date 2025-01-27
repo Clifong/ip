@@ -55,6 +55,10 @@ public class TaskWriterTest {
         }
     }
 
+    /**
+     * Check if task writer throws an error if deadline task uses right format
+     * but wrong number of characters
+     */
     @Test
     public void TaskWriterDeadlineWrongLengthButRightFormat(){
         try {
