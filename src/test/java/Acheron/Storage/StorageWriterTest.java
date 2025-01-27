@@ -10,6 +10,9 @@ public class StorageWriterTest {
             "Cannot invoke \"java.nio.file.Path.getFileSystem()\" because \"path\" is null";
     static final String NONSENSICALTASKERROR = "Tasks cannot have null name!";
 
+    /**
+     * Used to check if stoage manager will throw an error if the path does not exist
+     */
     @Test
     public void StorageManagerNonexistentPath(){
         try {
