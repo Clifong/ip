@@ -12,6 +12,8 @@ import java.io.InputStreamReader;
  * A utility class used to parse the user's input correctly
  */
 public class CommandParser {
+    private StorageManager storageManager;
+    private  TaskList taskList;
 
     /**
      * A constructor of the class
@@ -19,64 +21,52 @@ public class CommandParser {
      * @param taskList A task list instance
      */
     public CommandParser(StorageManager storageManager, TaskList taskList) {
+        this.storageManager = storageManager;
+        this.taskList = taskList;
+    }
 
+    public void receiveInput(String input) {
         try {
-            while (true) {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-                String input = "";
-                try {
-                    input = bufferedReader.readLine();
-                } catch (Exception e) {
-                    System.out.println("Something went wrong!");
-                    break;
+            //Marking and umarking
+            if (input.contains("mark")) {
+                String[] split = input.split(" ");
+                int num = Integer.parseInt(split[1]) - 1;
+                if (split[0].equals("unmark")) {
+                    taskList.unmarkTask(num);
+                } else {
+                    taskList.markTask(num);
                 }
-
-                //Marking and umarking
-                if (input.contains("mark")) {
-                    String[] split = input.split(" ");
-                    int num = Integer.parseInt(split[1]) - 1;
-                    if (split[0].equals("unmark")) {
-                        taskList.unmarkTask(num);
-                    } else {
-                        taskList.markTask(num);
-                    }
-                    storageManager.updateSavedFile(taskList);
-                    continue;
-                }
-
-                //Finding
-                if (input.contains("find")) {
-                    int space = input.indexOf(" ");
-                    String keyword = input.substring(space + 1);
-                    taskList.findAllTaskWithKeyword(keyword);
-                    continue;
-                }
-
-                //Bye
-                if (input.equals("bye")) {
-                    UI.displayText("Bye. Hope to see you again soon!");
-                    break;
-                }
-
-                //list
-                if (input.equals("list")) {
-                    UI.displayText(taskList.toString());
-                    continue;
-                }
-
-                //delete
-                if (input.contains("delete")) {
-                    String[] split = input.split(" ");
-                    int num = Integer.parseInt(split[1]) - 1;
-                    taskList.removeTask(num);
-                    storageManager.updateSavedFile(taskList);
-                    continue;
-                }
-
-                //add task
-                TaskWriter.createTask(input, taskList);
                 storageManager.updateSavedFile(taskList);
             }
+
+            //Finding
+            if (input.contains("find")) {
+                int space = input.indexOf(" ");
+                String keyword = input.substring(space + 1);
+                taskList.findAllTaskWithKeyword(keyword);
+            }
+
+            //Bye
+            if (input.equals("bye")) {
+                UI.displayText("Bye. Hope to see you again soon!");
+            }
+
+            //list
+            if (input.equals("list")) {
+                UI.displayText(taskList.toString());
+            }
+
+            //delete
+            if (input.contains("delete")) {
+                String[] split = input.split(" ");
+                int num = Integer.parseInt(split[1]) - 1;
+                taskList.removeTask(num);
+                storageManager.updateSavedFile(taskList);
+            }
+
+                //add task
+            TaskWriter.createTask(input, taskList);
+            storageManager.updateSavedFile(taskList);
         } catch (Exception e) {
             System.out.println(e);
         }

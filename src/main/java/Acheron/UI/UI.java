@@ -1,13 +1,14 @@
 package Acheron.UI;
 
+import Acheron.Acheron;
+
 /**
  * Represents the UI display
  */
 public class UI {
-
-    private static String genericTask = "____________________________________________________________\n"
+    private static String genericTask = "________________________________________________________\n"
             + "%s\n"
-            + "____________________________________________________________";
+            + "________________________________________________________";
 
     /**
      * A constructor of the UI class
@@ -23,6 +24,6 @@ public class UI {
      * @param text The text to be shown
      */
     public static void displayText(String text) {
-        System.out.println(genericTask.formatted(text));
+        Acheron.setMessage(genericTask.formatted(text));
     }
 }

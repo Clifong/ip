@@ -1,13 +1,12 @@
 package Acheron.Storage;
 import Acheron.Tasks.TaskList;
-import Acheron.Tasks.Tasks;
 import Acheron.Tasks.ToDos;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageWriterTest {
     static final String NONEXISTTENTPATHERROR =  "java.lang.NullPointerException:" +
-            "Cannot invoke \"java.nio.file.Path.getFileSystem()\" because \"path\" is null";
+            " Cannot invoke \"java.nio.file.Path.getFileSystem()\" because \"path\" is null";
     static final String NONSENSICALTASKERROR = "Tasks cannot have null name!";
 
     /**

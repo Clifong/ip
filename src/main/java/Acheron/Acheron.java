@@ -8,7 +8,8 @@ import Acheron.Utility.CommandParser;
  * Represents the chatbot
  */
 public class Acheron {
-    private CommandParser commandParser;
+    private static CommandParser commandParser;
+    private static String message;
     private StorageManager storageManager;
     private TaskList taskList;
     private UI ui;
@@ -26,6 +27,15 @@ public class Acheron {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    public static String getResponse(String input) {
+        commandParser.receiveInput(input);
+        return message;
+    }
+
+    public static void setMessage(String msg) {
+        message = msg;
     }
 
     /**
