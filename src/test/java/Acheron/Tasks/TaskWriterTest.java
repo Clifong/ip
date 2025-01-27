@@ -19,6 +19,9 @@ public class TaskWriterTest {
             "formatted! Make sure it follows the YYYY-MM-DD format";
     static final String CORRUPTEDFILEERROR = "Corrupted file. Cannot read data";
 
+    /**
+     * Check if task writer throws an error if to do task has no description
+     */
     @Test
     public void TaskWriterTodoEmptySpace(){
         try {
