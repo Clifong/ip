@@ -20,7 +20,7 @@ public class TaskWriterTest {
     static final String CORRUPTEDFILEERROR = "Corrupted file. Cannot read data";
 
     /**
-     * Check if task writer throws an error if to do task has no description
+     * Check if task writer throws an error if to do task uses space as description
      */
     @Test
     public void TaskWriterTodoEmptySpace(){
@@ -31,6 +31,9 @@ public class TaskWriterTest {
         }
     }
 
+    /**
+     * Check if task writer throws an error if to do task has no description
+     */
     @Test
     public void TaskWriterTodoEmpty(){
         try {
