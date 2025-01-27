@@ -93,6 +93,10 @@ public class TaskWriterTest {
         }
     }
 
+    /**
+     * Checks if the task writer throwns an error
+     * when creating a saved task from a corrupted file 
+     */
     @Test
     public void TaskWriterSavedFileTodoEmpty(){
         try {
