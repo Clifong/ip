@@ -68,6 +68,9 @@ public class TaskWriterTest {
         }
     }
 
+    /**
+     * Check if task writer throws an error if the event is wrongly written
+     */
     @Test
     public void TaskWriterEventWrong(){
         try {
