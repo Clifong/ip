@@ -1,8 +1,8 @@
 package Acheron.Tasks;
 
-import Acheron.UI.UI;
-
 import java.util.ArrayList;
+
+import Acheron.UI.UI;
 
 /**
  * Represents the an object that stores all tasks
@@ -16,10 +16,11 @@ public class TaskList {
      */
     public void addTask(Tasks task) {
         addTaskFromStorage(task);
-        UI.displayText("Got it. I've added this task:\n" +
-                task +
-                "\n" +
-                "Now you have " + tasks.size() +" tasks in the list.");
+        UI.displayText("Got it. I've added this task:\n"
+                + task
+                + "\n"
+                + "Now you have " + tasks.size()
+                + " tasks in the list.");
     }
 
     /**
@@ -38,10 +39,11 @@ public class TaskList {
     public void removeTask(int i) {
         Tasks removeTask = tasks.get(i);
         tasks.remove(i);
-        UI.displayText("Noted. I've removed this task:\n" +
-                removeTask +
-                "\n" +
-                "Now you have " + tasks.size() +" tasks in the list.");
+        UI.displayText("Noted. I've removed this task:\n"
+                + removeTask
+                + "\n"
+                + "Now you have " + tasks.size()
+                + " tasks in the list.");
     }
 
     /**
@@ -63,7 +65,7 @@ public class TaskList {
     }
 
     /**
-     Overrides the to string method with a custom version
+     * Overrides the to string method with a custom version
      * @return A string format of  the task list
      */
     @Override

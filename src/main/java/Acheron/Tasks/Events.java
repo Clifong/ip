@@ -1,10 +1,9 @@
 package Acheron.Tasks;
 
-import Acheron.Exceptions.TaskExceptions;
-import Acheron.Tasks.Tasks;
-import Acheron.Utility.DateFormatter;
-
 import java.time.LocalDate;
+
+import Acheron.Exceptions.TaskExceptions;
+import Acheron.Utility.DateFormatter;
 
 /**
  * Represents a events task
@@ -34,7 +33,9 @@ public class Events extends Tasks {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + DateFormatter.formatDate(from) + " to: " + DateFormatter.formatDate(to) + ")";
+        return "[E]" + super.toString() + " (from: "
+                + DateFormatter.formatDate(from) + " to: "
+                + DateFormatter.formatDate(to) + ")";
     }
 
     /**
@@ -45,6 +46,9 @@ public class Events extends Tasks {
      */
     @Override
     public String saveTask(boolean last) {
-        return  "E" + super.saveTask(last) + "|" + from.toString() + "|" + to.toString() + (last ? "" : "\n");
+        return "E"
+                + super.saveTask(last) + "|"
+                + from.toString() + "|" + to.toString()
+                + (last ? "" : "\n");
     }
 }

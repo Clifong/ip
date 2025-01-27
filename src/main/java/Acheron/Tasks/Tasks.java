@@ -25,7 +25,7 @@ public abstract class Tasks {
     }
 
     /**
-     Overrides the to string method with a custom version
+     * Overrides the to string method with a custom version
      * @return A string format of the task object
      */
     @Override

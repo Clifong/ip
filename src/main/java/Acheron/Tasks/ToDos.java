@@ -1,7 +1,6 @@
 package Acheron.Tasks;
 
 import Acheron.Exceptions.TaskExceptions;
-import Acheron.Tasks.Tasks;
 
 /**
  * Represents a events task
