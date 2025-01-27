@@ -95,7 +95,7 @@ public class TaskWriterTest {
 
     /**
      * Checks if the task writer throwns an error
-     * when creating a saved task from a corrupted file 
+     * when creating a saved task from a corrupted file
      */
     @Test
     public void TaskWriterSavedFileTodoEmpty(){
@@ -106,6 +106,10 @@ public class TaskWriterTest {
         }
     }
 
+    /**
+     * Checks if the task writer throws an error
+     * when creating a saved task from a corrupted file
+     */
     @Test
     public void TaskWriterSavedFileDeadlineWrongFormat(){
         try {
