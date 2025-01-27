@@ -23,6 +23,9 @@ public class StorageWriterTest {
         }
     }
 
+    /**
+     * Used to check if stoage manager will throw an error if the task is invalid
+     */
     @Test
     public void StorageManagerNonsensicalTask(){
         try {
