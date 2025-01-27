@@ -37,6 +37,7 @@ public class CommandParser {
                     taskList.markTask(num);
                 }
                 storageManager.updateSavedFile(taskList);
+                return;
             }
 
             //Finding
@@ -44,16 +45,19 @@ public class CommandParser {
                 int space = input.indexOf(" ");
                 String keyword = input.substring(space + 1);
                 taskList.findAllTaskWithKeyword(keyword);
+                return;
             }
 
             //Bye
             if (input.equals("bye")) {
                 UI.displayText("Bye. Hope to see you again soon!");
+                return;
             }
 
             //list
             if (input.equals("list")) {
                 UI.displayText(taskList.toString());
+                return;
             }
 
             //delete
@@ -62,6 +66,7 @@ public class CommandParser {
                 int num = Integer.parseInt(split[1]) - 1;
                 taskList.removeTask(num);
                 storageManager.updateSavedFile(taskList);
+                return;
             }
 
                 //add task
