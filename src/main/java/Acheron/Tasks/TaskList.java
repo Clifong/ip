@@ -92,6 +92,10 @@ public class TaskList {
         return stringBuilder.toString();
     }
 
+    /**
+     * Find all tasks with the same keyword
+     * @param keyword The keyword we are interested 
+     */
     public void findAllTaskWithKeyword(String keyword) {
         ArrayList<Tasks> rightTask = new ArrayList<>();
         for (Tasks task : this.tasks) {
