@@ -36,6 +36,7 @@ public class TaskWriter {
                 if (!isValidDate(deadline)) {
                     throw new BadDateExceptions();
                 }
+                assert deadline.length() == 10;
                 newTask = new Deadlines(taskName, false, deadline);
             } catch (BadDateExceptions e) {
                 throw e;
@@ -52,6 +53,8 @@ public class TaskWriter {
                 if (!isValidDate(from) || !isValidDate(to)) {
                     throw new BadDateExceptions();
                 }
+                assert from.length() == 10;
+                assert to.length() == 10;
                 newTask = new Events(taskName, false, from, to);
             } catch (BadDateExceptions e) {
                 throw e;

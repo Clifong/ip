@@ -1,5 +1,6 @@
 package Acheron.Utility;
 
+import Acheron.Exceptions.Exceptions;
 import Acheron.Storage.StorageManager;
 import Acheron.Tasks.TaskList;
 import Acheron.Tasks.TaskWriter;
@@ -72,11 +73,11 @@ public class CommandParser {
                 return;
             }
 
-                //add task
+            //add task
             TaskWriter.createTask(input, taskList);
             storageManager.updateSavedFile(taskList);
         } catch (Exception e) {
-            System.out.println(e);
+            UI.displayText(e.toString());
         }
     }
 }
