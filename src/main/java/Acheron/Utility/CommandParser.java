@@ -1,5 +1,6 @@
 package Acheron.Utility;
 
+import Acheron.Exceptions.Exceptions;
 import Acheron.Storage.StorageManager;
 import Acheron.Tasks.TaskList;
 import Acheron.Tasks.TaskWriter;
@@ -7,6 +8,7 @@ import Acheron.UI.UI;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Objects;
 
 /**
  * A utility class used to parse the user's input correctly
@@ -69,11 +71,11 @@ public class CommandParser {
                 return;
             }
 
-                //add task
+            //add task
             TaskWriter.createTask(input, taskList);
             storageManager.updateSavedFile(taskList);
         } catch (Exception e) {
-            System.out.println(e);
+            UI.displayText(e.toString());
         }
     }
 }
