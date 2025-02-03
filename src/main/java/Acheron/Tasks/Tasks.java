@@ -7,21 +7,21 @@ import Acheron.Exceptions.TaskExceptions;
  * subclass habe
  */
 public abstract class Tasks {
-    private boolean done;
+    private boolean isDone;
     private String name;
 
     /**
      * A constructor for the Tasks class
      * @param name Te name of the task
-     * @param done Whether the tasks is done or not. Required when generating tasks from the saved file
+     * @param isDone Whether the tasks is done or not. Required when generating tasks from the saved file
      * @throws TaskExceptions An error if invalid input is fed into the constructor
      */
-    public Tasks(String name, boolean done) throws TaskExceptions {
+    public Tasks(String name, boolean isDone) throws TaskExceptions {
         if (name == null) {
             throw new TaskExceptions();
         }
         this.name = name;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /**
@@ -30,7 +30,7 @@ public abstract class Tasks {
      */
     @Override
     public String toString() {
-        if (done) {
+        if (isDone) {
             return "[X] %s"
                     .formatted(this.name);
         } else {
@@ -42,24 +42,24 @@ public abstract class Tasks {
      * A method to mark that a task is done
      */
     public void mark() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
      * A method to unmark an already done task
      */
     public void unmark() {
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
      * Used to generate the string content of the task for saving
      * @param last Indicates if the task is the last task in the task list object. Needed so the
-     *             file writer does not add an unecessary new line which can cause file corruption
+     *             file writer does not add an unnecessary new line which can cause file corruption
      * @return The content of the task
      */
     public String saveTask(boolean last) {
-        if (done) {
+        if (isDone) {
             return "|" + "X" + "|" + name;
         } else {
             return "|" + "O" + "|" + name;

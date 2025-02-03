@@ -4,7 +4,7 @@ package Acheron.Exceptions;
  * This exception is thrown if an input is wrongly formatted or incomplete
  * when trying to create a to do task
  */
-public class ToDoExceptions extends Exceptions {
+public class ToDoExceptions extends GenericExceptions {
 
     /**
      * Override the toString() method so a custom error message is printed out if neede

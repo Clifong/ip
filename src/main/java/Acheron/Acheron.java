@@ -30,7 +30,7 @@ public class Acheron {
     }
 
     public static String getResponse(String input) {
-        commandParser.receiveInput(input);
+        commandParser.parseInput(input);
         return message;
     }
 

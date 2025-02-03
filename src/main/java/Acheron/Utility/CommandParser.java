@@ -6,10 +6,6 @@ import Acheron.Tasks.TaskList;
 import Acheron.Tasks.TaskWriter;
 import Acheron.UI.UI;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.Objects;
-
 /**
  * A utility class used to parse the user's input correctly
  */
@@ -19,7 +15,7 @@ public class CommandParser {
 
     /**
      * A constructor of the class
-     * @param storageManager A storage manager instace
+     * @param storageManager A storage manager instance
      * @param taskList A task list instance
      */
     public CommandParser(StorageManager storageManager, TaskList taskList) {
@@ -27,7 +23,13 @@ public class CommandParser {
         this.taskList = taskList;
     }
 
-    public void receiveInput(String input) {
+    /**
+     * A method to parse the input received by the chat bot
+     * Returns the appropriate output based on the parsed
+     * input
+     * @param input The text keyed in by the user
+     */
+    public void parseInput(String input) {
         try {
             //Marking and umarking
             if (input.contains("mark")) {

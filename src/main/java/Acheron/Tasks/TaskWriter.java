@@ -1,10 +1,6 @@
 package Acheron.Tasks;
 
-import Acheron.Exceptions.BadDateExceptions;
-import Acheron.Exceptions.CorruptedFileException;
-import Acheron.Exceptions.EventExceptions;
-import Acheron.Exceptions.Exceptions;
-import Acheron.Exceptions.ToDoExceptions;
+import Acheron.Exceptions.*;
 
 /**
  * A class that does work to extract the required information out of any input
@@ -37,7 +33,7 @@ public class TaskWriter {
                 String taskWithDate = input.substring(input.indexOf(' ') + 1, input.length());
                 String taskName = taskWithDate.substring(0, taskWithDate.indexOf("/by") - 1);
                 String deadline = taskWithDate.substring(taskWithDate.indexOf("by") + 3, taskWithDate.length());
-                if (!dataValidator(deadline)) {
+                if (!isValidDate(deadline)) {
                     throw new BadDateExceptions();
                 }
                 assert deadline.length() == 10;
@@ -46,7 +42,7 @@ public class TaskWriter {
                 throw e;
             }
             catch (Exception e) {
-                throw new EventExceptions();
+                throw new DeadlineExceptions();
             }
         } else if (input.contains("event")) {
             try {
@@ -54,7 +50,7 @@ public class TaskWriter {
                 String taskName = taskWithDate.substring(0, taskWithDate.indexOf("/from") - 1);
                 String from = taskWithDate.substring(taskWithDate.indexOf("from") + 5, taskWithDate.indexOf("/to") - 1);
                 String to = taskWithDate.substring(taskWithDate.indexOf("to") + 3, taskWithDate.length());
-                if (!dataValidator(from) || !dataValidator(to)) {
+                if (!isValidDate(from) || !isValidDate(to)) {
                     throw new BadDateExceptions();
                 }
                 assert from.length() == 10;
@@ -67,7 +63,7 @@ public class TaskWriter {
                 throw new EventExceptions();
             }
         } else {
-            throw new Exceptions();
+            throw new GenericExceptions();
         }
         taskList.addTask(newTask);
     }
@@ -77,8 +73,7 @@ public class TaskWriter {
      * @param date A date we are checking
      * @return True if the date is correctly formatted. Otherwise false
      */
-    private static boolean dataValidator(String date) {
-        assert date.length() == 10;
+    private static boolean isValidDate(String date) {
         if (!date.contains("-")) {
             return false;
         }
@@ -101,17 +96,17 @@ public class TaskWriter {
     public static void createSavedTask(String input, TaskList taskList) throws Exception {
         try {
             String[] split = input.split("\\|");
-            boolean done = split[1].equals("X");
+            boolean isDone = split[1].equals("X");
             String taskName = split[2];
             if (split[0].equals("T")) {
-                taskList.addTaskFromStorage(new ToDos(taskName, done));
+                taskList.addTaskFromStorage(new ToDos(taskName, isDone));
             } else if (split[0].equals("D")) {
                 String by = split[3];
-                taskList.addTaskFromStorage(new Deadlines(taskName, done, by));
+                taskList.addTaskFromStorage(new Deadlines(taskName, isDone, by));
             } else if (split[0].equals("E")) {
                 String from = split[3];
                 String to = split[4];
-                taskList.addTaskFromStorage(new Events(taskName, done, from, to));
+                taskList.addTaskFromStorage(new Events(taskName, isDone, from, to));
             } else {
                 throw new CorruptedFileException();
             }
