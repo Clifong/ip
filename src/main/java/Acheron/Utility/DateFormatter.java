@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class DateFormatter {
 
     /**
-     * Takes in a date object and create a custom display for them
+     * Takes in a date object and create a custom string display for them
      * @param date A date object
      * @return A custom string text representing the date
      */
