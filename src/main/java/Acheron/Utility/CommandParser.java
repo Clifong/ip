@@ -14,7 +14,7 @@ public class CommandParser {
 
     /**
      * A constructor of the class
-     * @param storageManager A storage manager instace
+     * @param storageManager A storage manager instance
      * @param taskList A task list instance
      */
     public CommandParser(StorageManager storageManager, TaskList taskList) {
@@ -26,7 +26,7 @@ public class CommandParser {
      * A method to parse the input received by the chat bot
      * Returns the appropriate output based on the parsed
      * input
-     * @param input
+     * @param input The text keyed in by the user
      */
     public void parseInput(String input) {
         try {

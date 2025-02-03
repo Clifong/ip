@@ -55,7 +55,7 @@ public abstract class Tasks {
     /**
      * Used to generate the string content of the task for saving
      * @param last Indicates if the task is the last task in the task list object. Needed so the
-     *             file writer does not add an unecessary new line which can cause file corruption
+     *             file writer does not add an unnecessary new line which can cause file corruption
      * @return The content of the task
      */
     public String saveTask(boolean last) {

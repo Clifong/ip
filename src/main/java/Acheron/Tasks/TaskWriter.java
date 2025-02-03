@@ -1,10 +1,6 @@
 package Acheron.Tasks;
 
-import Acheron.Exceptions.BadDateExceptions;
-import Acheron.Exceptions.CorruptedFileException;
-import Acheron.Exceptions.EventExceptions;
-import Acheron.Exceptions.Exceptions;
-import Acheron.Exceptions.ToDoExceptions;
+import Acheron.Exceptions.*;
 
 /**
  * A class that does work to extract the required information out of any input
@@ -45,7 +41,7 @@ public class TaskWriter {
                 throw e;
             }
             catch (Exception e) {
-                throw new EventExceptions();
+                throw new DeadlineExceptions();
             }
         } else if (input.contains("event")) {
             try {
@@ -64,7 +60,7 @@ public class TaskWriter {
                 throw new EventExceptions();
             }
         } else {
-            throw new Exceptions();
+            throw new GenericExceptions();
         }
         taskList.addTask(newTask);
     }
