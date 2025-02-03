@@ -40,6 +40,7 @@ public class TaskWriter {
                 if (!dataValidator(deadline)) {
                     throw new BadDateExceptions();
                 }
+                assert deadline.length() == 10;
                 newTask = new Deadlines(taskName, false, deadline);
             } catch (BadDateExceptions e) {
                 throw e;
@@ -56,6 +57,8 @@ public class TaskWriter {
                 if (!dataValidator(from) || !dataValidator(to)) {
                     throw new BadDateExceptions();
                 }
+                assert from.length() == 10;
+                assert to.length() == 10;
                 newTask = new Events(taskName, false, from, to);
             } catch (BadDateExceptions e) {
                 throw e;
@@ -75,6 +78,7 @@ public class TaskWriter {
      * @return True if the date is correctly formatted. Otherwise false
      */
     private static boolean dataValidator(String date) {
+        assert date.length() == 10;
         if (!date.contains("-")) {
             return false;
         }

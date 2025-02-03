@@ -17,6 +17,8 @@ public class DateFormatter {
         String day = stringDate.substring(stringDate.length() - 2);
         String month = String.valueOf(date.getMonth());
         String year = String.valueOf(date.getYear());
+        assert day.length() <= 2;
+        assert year.length() == 4;
         return "%s %s %s".formatted(month, day, year);
     }
 }
