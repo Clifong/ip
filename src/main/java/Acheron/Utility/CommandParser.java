@@ -1,5 +1,14 @@
 package Acheron.Utility;
 
+import Acheron.CommandInfo.ByeCommandInfo;
+import Acheron.CommandInfo.DeadlineCommandInfo;
+import Acheron.CommandInfo.EventCommandInfo;
+import Acheron.CommandInfo.FindCommandInfo;
+import Acheron.CommandInfo.GenericCommandInfo;
+import Acheron.CommandInfo.ListCommandInfo;
+import Acheron.CommandInfo.MarkCommandInfo;
+import Acheron.CommandInfo.ToDoCommandInfo;
+import Acheron.CommandInfo.UnmarkCommandInfo;
 import Acheron.Storage.StorageManager;
 import Acheron.Tasks.TaskList;
 import Acheron.Tasks.TaskWriter;
@@ -9,8 +18,18 @@ import Acheron.UI.UI;
  * A utility class used to parse the user's input correctly
  */
 public class CommandParser {
+    private static GenericCommandInfo[] ALL_COMMANDS_IFNO = {
+        new ListCommandInfo(),
+        new MarkCommandInfo(),
+        new UnmarkCommandInfo(),
+        new FindCommandInfo(),
+        new ToDoCommandInfo(),
+        new DeadlineCommandInfo(),
+        new EventCommandInfo(),
+        new ByeCommandInfo(),
+    };
     private StorageManager storageManager;
-    private  TaskList taskList;
+    private TaskList taskList;
 
     /**
      * A constructor of the class
@@ -69,6 +88,17 @@ public class CommandParser {
                 int num = Integer.parseInt(split[1]) - 1;
                 taskList.removeTask(num);
                 storageManager.updateSavedFile(taskList);
+                return;
+            }
+
+            //help
+            if (input.contains("help")) {
+                StringBuilder output = new StringBuilder();
+                output.append("Here are all the commands supported:\n");
+                for (GenericCommandInfo commandInfo : ALL_COMMANDS_IFNO) {
+                    output.append(commandInfo);
+                }
+                UI.displayText(output.toString());
                 return;
             }
 
