@@ -1,14 +1,6 @@
 package Acheron.Utility;
 
-import Acheron.CommandInfo.ByeCommandInfo;
-import Acheron.CommandInfo.DeadlineCommandInfo;
-import Acheron.CommandInfo.EventCommandInfo;
-import Acheron.CommandInfo.FindCommandInfo;
-import Acheron.CommandInfo.GenericCommandInfo;
-import Acheron.CommandInfo.ListCommandInfo;
-import Acheron.CommandInfo.MarkCommandInfo;
-import Acheron.CommandInfo.ToDoCommandInfo;
-import Acheron.CommandInfo.UnmarkCommandInfo;
+import Acheron.CommandInfo.*;
 import Acheron.Storage.StorageManager;
 import Acheron.Tasks.TaskList;
 import Acheron.Tasks.TaskWriter;
@@ -26,6 +18,7 @@ public class CommandParser {
         new ToDoCommandInfo(),
         new DeadlineCommandInfo(),
         new EventCommandInfo(),
+        new DeleteCommandInfo(),
         new ByeCommandInfo(),
     };
     private StorageManager storageManager;

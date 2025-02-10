@@ -2,6 +2,7 @@ package Acheron.Tasks;
 
 import java.util.ArrayList;
 
+import Acheron.Exceptions.InvalidDeleteExceptions;
 import Acheron.Ui.Ui;
 
 /**
@@ -36,14 +37,18 @@ public class TaskList {
      * Remove the ith task
      * @param i The position of the task in the array list
      */
-    public void removeTask(int i) {
-        Task removeTask = tasks.get(i);
-        tasks.remove(i);
-        Ui.displayText("Noted. I've removed this task:\n"
-                + removeTask
-                + "\n"
-                + "Now you have " + tasks.size()
-                + " tasks in the list.");
+    public void removeTask(int i) throws Exception {
+        try {
+            Task removeTask = tasks.get(i);
+            tasks.remove(i);
+            Ui.displayText("Noted. I've removed this task:\n"
+                    + removeTask
+                    + "\n"
+                    + "Now you have " + tasks.size()
+                    + " tasks in the list.");
+        } catch (Exception e) {
+            throw new InvalidDeleteExceptions();
+        }
     }
 
     /**

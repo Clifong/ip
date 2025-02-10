@@ -5,7 +5,10 @@ package Acheron.CommandInfo;
  * info when deadline is used
  */
 public class DeadlineCommandInfo extends GenericCommandInfo {
-
+    /**
+     * Override the toString() method so a custom message is printed out
+     * @return Custom string message
+     */
     @Override
     public String toString() {
         String topHalf = super.toString();

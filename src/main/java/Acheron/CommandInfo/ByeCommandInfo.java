@@ -5,7 +5,10 @@ package Acheron.CommandInfo;
  * info when bye is used
  */
 public class ByeCommandInfo extends GenericCommandInfo {
-
+    /**
+     * Override the toString() method so a custom message is printed out
+     * @return Custom string message
+     */
     @Override
     public String toString() {
         String topHalf = super.toString();

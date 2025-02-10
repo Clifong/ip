@@ -2,9 +2,9 @@ package Acheron.CommandInfo;
 
 /**
  * Used to create an object that represents the help command
- * info when unmark is used
+ * info when delete is used
  */
-public class UnmarkCommandInfo extends GenericCommandInfo {
+public class DeleteCommandInfo extends GenericCommandInfo {
     /**
      * Override the toString() method so a custom message is printed out
      * @return Custom string message
@@ -13,10 +13,10 @@ public class UnmarkCommandInfo extends GenericCommandInfo {
     public String toString() {
         String topHalf = super.toString();
         return topHalf
-                + "unmark (num)\n"
-                + "Unmark a task as incomplete\n\n"
+                + "delete (num) \n"
+                + "Delete a task\n\n"
                 + "Inputs:\n"
                 + "num: The task number\n\n"
-                + "E.g usage: unmark 1\n";
+                + "E.g usage: delete 1\n";
     }
 }
