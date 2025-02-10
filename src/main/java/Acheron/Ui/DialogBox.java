@@ -1,4 +1,4 @@
-package Acheron.UI;
+package Acheron.Ui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

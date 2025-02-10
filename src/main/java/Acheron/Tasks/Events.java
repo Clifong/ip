@@ -8,23 +8,23 @@ import Acheron.Utility.DateFormatter;
 /**
  * Represents a events task
  */
-public class Events extends Tasks {
+public class Events extends Task {
 
-    private LocalDate from;
-    private LocalDate to;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     /**
      * Constructor for the event class
      * @param name The name of the tasks
-     * @param done Whether the tasks is done or not. Required when generating tasks from the saved file
-     * @param from When the task starts
-     * @param to WHen the task ends
+     * @param isDone Whether the tasks is done or not. Required when generating tasks from the saved file
+     * @param startDate When the task starts
+     * @param endDate WHen the task ends
      * @throws TaskExceptions Throws an exception if a wrong input is supplied
      */
-    public Events(String name, boolean done, String from, String to) throws TaskExceptions {
-        super(name, done);
-        this.from = LocalDate.parse(from);
-        this.to = LocalDate.parse(to);
+    public Events(String name, boolean isDone, String startDate, String endDate) throws TaskExceptions {
+        super(name, isDone);
+        this.startDate = LocalDate.parse(startDate);
+        this.endDate = LocalDate.parse(endDate);
     }
 
     /**
@@ -34,21 +34,21 @@ public class Events extends Tasks {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: "
-                + DateFormatter.formatDate(from) + " to: "
-                + DateFormatter.formatDate(to) + ")";
+                + DateFormatter.formatDate(startDate) + " to: "
+                + DateFormatter.formatDate(endDate) + ")";
     }
 
     /**
      * Used to generate the string content of the task for saving
-     * @param last Indicates if the task is the last task in the task list object. Needed so the
+     * @param isLast Indicates if the task is the last task in the task list object. Needed so the
      *             file writer does not add an unecessary new line which can cause file corruption
      * @return The content of the task
      */
     @Override
-    public String saveTask(boolean last) {
+    public String saveTask(boolean isLast) {
         return "E"
-                + super.saveTask(last) + "|"
-                + from.toString() + "|" + to.toString()
-                + (last ? "" : "\n");
+                + super.saveTask(isLast) + "|"
+                + startDate.toString() + "|" + endDate.toString()
+                + (isLast ? "" : "\n");
     }
 }

@@ -43,7 +43,7 @@ test {
 }
 
 application {
-    mainClass.set("Acheron.UI.Launcher")
+    mainClass.set("Acheron.Ui.Launcher")
 }
 
 shadowJar {

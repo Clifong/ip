@@ -16,7 +16,7 @@ public class TaskWriter {
      */
     public static void createTask(String input, TaskList taskList) throws Exception {
         //Generic adding of tasls
-        Tasks newTask = null;
+        Task newTask = null;
         input = input.strip();
         if (input.contains("todo")) {
             try {
@@ -37,7 +37,7 @@ public class TaskWriter {
                     throw new BadDateExceptions();
                 }
                 assert deadline.length() == 10;
-                newTask = new Deadlines(taskName, false, deadline);
+                newTask = new Deadline(taskName, false, deadline);
             } catch (BadDateExceptions e) {
                 throw e;
             }
@@ -102,7 +102,7 @@ public class TaskWriter {
                 taskList.addTaskFromStorage(new ToDos(taskName, isDone));
             } else if (split[0].equals("D")) {
                 String by = split[3];
-                taskList.addTaskFromStorage(new Deadlines(taskName, isDone, by));
+                taskList.addTaskFromStorage(new Deadline(taskName, isDone, by));
             } else if (split[0].equals("E")) {
                 String from = split[3];
                 String to = split[4];

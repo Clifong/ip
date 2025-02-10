@@ -2,21 +2,21 @@ package Acheron.Tasks;
 
 import java.util.ArrayList;
 
-import Acheron.UI.UI;
+import Acheron.Ui.Ui;
 
 /**
  * Represents the an object that stores all tasks
  */
 public class TaskList {
-    private ArrayList<Tasks> tasks = new ArrayList<>();
+    private ArrayList<Task> tasks = new ArrayList<>();
 
     /**
      * Adds a task
      * @param task A task to be added
      */
-    public void addTask(Tasks task) {
+    public void addTask(Task task) {
         addTaskFromStorage(task);
-        UI.displayText("Got it. I've added this task:\n"
+        Ui.displayText("Got it. I've added this task:\n"
                 + task
                 + "\n"
                 + "Now you have " + tasks.size()
@@ -28,7 +28,7 @@ public class TaskList {
      * is different
      * @param task A task to be added
      */
-    public void addTaskFromStorage(Tasks task) {
+    public void addTaskFromStorage(Task task) {
         tasks.add(task);
     }
 
@@ -37,9 +37,9 @@ public class TaskList {
      * @param i The position of the task in the array list
      */
     public void removeTask(int i) {
-        Tasks removeTask = tasks.get(i);
+        Task removeTask = tasks.get(i);
         tasks.remove(i);
-        UI.displayText("Noted. I've removed this task:\n"
+        Ui.displayText("Noted. I've removed this task:\n"
                 + removeTask
                 + "\n"
                 + "Now you have " + tasks.size()
@@ -52,7 +52,7 @@ public class TaskList {
      */
     public void markTask(int i) {
         tasks.get(i).mark();
-        UI.displayText("Nice! I've marked this task as done:\n" + tasks.get(i));
+        Ui.displayText("Nice! I've marked this task as done:\n" + tasks.get(i));
     }
 
     /**
@@ -61,7 +61,7 @@ public class TaskList {
      */
     public void unmarkTask(int i) {
         tasks.get(i).unmark();
-        UI.displayText("OK, I've marked this task as not done yet:\n" + tasks.get(i));
+        Ui.displayText("OK, I've marked this task as not done yet:\n" + tasks.get(i));
     }
 
     /**
@@ -99,8 +99,8 @@ public class TaskList {
      * @param keyword The keyword we are interested
      */
     public void findAllTaskWithKeyword(String keyword) {
-        ArrayList<Tasks> rightTask = new ArrayList<>();
-        for (Tasks task : this.tasks) {
+        ArrayList<Task> rightTask = new ArrayList<>();
+        for (Task task : this.tasks) {
             if (task.containsKeyword(keyword)) {
                 rightTask.add(task);
             }
@@ -113,6 +113,6 @@ public class TaskList {
                 listOfTasks += String.format("%d. %s", i + 1, rightTask.get(i));
             }
         }
-        UI.displayText("Here are the matching tasks in your list:\n" + listOfTasks);
+        Ui.displayText("Here are the matching tasks in your list:\n" + listOfTasks);
     }
 }

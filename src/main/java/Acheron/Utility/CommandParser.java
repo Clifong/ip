@@ -12,7 +12,7 @@ import Acheron.CommandInfo.UnmarkCommandInfo;
 import Acheron.Storage.StorageManager;
 import Acheron.Tasks.TaskList;
 import Acheron.Tasks.TaskWriter;
-import Acheron.UI.UI;
+import Acheron.Ui.Ui;
 
 /**
  * A utility class used to parse the user's input correctly
@@ -72,13 +72,13 @@ public class CommandParser {
 
             //Bye
             if (input.equals("bye")) {
-                UI.displayText("Bye. Hope to see you again soon!");
+                Ui.displayText("Bye. Hope to see you again soon!");
                 return;
             }
 
             //list
             if (input.equals("list")) {
-                UI.displayText(taskList.toString());
+                Ui.displayText(taskList.toString());
                 return;
             }
 
@@ -98,7 +98,7 @@ public class CommandParser {
                 for (GenericCommandInfo commandInfo : ALL_COMMANDS_IFNO) {
                     output.append(commandInfo);
                 }
-                UI.displayText(output.toString());
+                Ui.displayText(output.toString());
                 return;
             }
 
@@ -106,7 +106,7 @@ public class CommandParser {
             TaskWriter.createTask(input, taskList);
             storageManager.updateSavedFile(taskList);
         } catch (Exception e) {
-            UI.displayText(e.toString());
+            Ui.displayText(e.toString());
         }
     }
 }

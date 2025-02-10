@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageWriterTest {
-    static final String NONEXISTTENTPATHERROR =  "java.lang.NullPointerException:" +
+    static final String NONEXISTTENT_PATH_ERROR =  "java.lang.NullPointerException:" +
             " Cannot invoke \"java.nio.file.Path.getFileSystem()\" because \"path\" is null";
-    static final String NONSENSICALTASKERROR = "Tasks cannot have null name!";
+    static final String NONSENSICAL_TASK_ERROR = "Tasks cannot have null name!";
 
     /**
      * Used to check if stoage manager will throw an error if the path does not exist
@@ -18,7 +18,7 @@ public class StorageWriterTest {
             StorageManager storageManager = new StorageManager("", new TaskList());
             storageManager.updateSavedFile(new TaskList());
         } catch (Exception e) {
-            assertEquals(NONEXISTTENTPATHERROR, e.toString());
+            assertEquals(NONEXISTTENT_PATH_ERROR, e.toString());
         }
     }
 
@@ -33,7 +33,7 @@ public class StorageWriterTest {
             StorageManager storageManager = new StorageManager("./data/duke.txt", taskList);
             storageManager.updateSavedFile(taskList);
         } catch (Exception e) {
-            assertEquals(NONSENSICALTASKERROR, e.toString());
+            assertEquals(NONSENSICAL_TASK_ERROR, e.toString());
         }
     }
 

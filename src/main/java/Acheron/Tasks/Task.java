@@ -6,7 +6,7 @@ import Acheron.Exceptions.TaskExceptions;
  * Abstratc class for all tasks which contain the minimal fields and methods
  * subclass habe
  */
-public abstract class Tasks {
+public abstract class Task {
     private boolean isDone;
     private String name;
 
@@ -16,7 +16,7 @@ public abstract class Tasks {
      * @param isDone Whether the tasks is done or not. Required when generating tasks from the saved file
      * @throws TaskExceptions An error if invalid input is fed into the constructor
      */
-    public Tasks(String name, boolean isDone) throws TaskExceptions {
+    public Task(String name, boolean isDone) throws TaskExceptions {
         if (name == null) {
             throw new TaskExceptions();
         }
@@ -54,11 +54,11 @@ public abstract class Tasks {
 
     /**
      * Used to generate the string content of the task for saving
-     * @param last Indicates if the task is the last task in the task list object. Needed so the
+     * @param isLast Indicates if the task is the last task in the task list object. Needed so the
      *             file writer does not add an unnecessary new line which can cause file corruption
      * @return The content of the task
      */
-    public String saveTask(boolean last) {
+    public String saveTask(boolean isLast) {
         if (isDone) {
             return "|" + "X" + "|" + name;
         } else {

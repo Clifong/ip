@@ -1,4 +1,4 @@
-package Acheron.UI;
+package Acheron.Ui;
 
 import javafx.application.Application;
 

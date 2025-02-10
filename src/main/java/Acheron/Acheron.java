@@ -1,7 +1,6 @@
 package Acheron;
 import Acheron.Storage.StorageManager;
 import Acheron.Tasks.TaskList;
-import Acheron.UI.UI;
 import Acheron.Utility.CommandParser;
 
 /**
@@ -12,7 +11,6 @@ public class Acheron {
     private static String message;
     private StorageManager storageManager;
     private TaskList taskList;
-    private UI ui;
 
     /**
      * Constructor of the class
@@ -20,7 +18,6 @@ public class Acheron {
      */
     public Acheron(String storagePath) {
         try {
-            ui = new UI();
             taskList = new TaskList();
             storageManager = new StorageManager(storagePath, taskList);
             commandParser = new CommandParser(storageManager, taskList);

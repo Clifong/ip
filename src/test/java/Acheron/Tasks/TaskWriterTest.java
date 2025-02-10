@@ -3,21 +3,21 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskWriterTest {
-    static final String TODOEMPTYSPACEERROR = "Check your to do input.\n" +
-            " Make sure the text follows the format\n" +
-            " todo [Some text]\n" +
-            " (Note that the [ ] is not needed! E.g todo eat peach";
-    static final String TODOEMPTYERROR = "Check your to do input.\n" +
-            " Make sure the text follows the format\n" +
-            " todo [Some text]\n" +
-            " (Note that the [ ] is not needed! E.g todo eat peach";
-    static final String DEADLINEWRONGGFORMATERROR = "Date is wrongly formatted!" +
+    static final String TODO_EMPTY_SPACE_ERROR = "Check your to do input.\n" +
+            "Make sure the text follows the format\n" +
+            "todo [Some text]\n" +
+            "(Note that the [ ] is not needed! E.g todo eat peach";
+    static final String TO_DO_EMPTY_ERROR = "Check your to do input.\n" +
+            "Make sure the text follows the format\n" +
+            "todo [Some text]\n" +
+            "(Note that the [ ] is not needed! E.g todo eat peach";
+    static final String DEADLINE_WRONG_FORMAT_ERROR = "Date is wrongly formatted!" +
             " Make sure it follows the YYYY-MM-DD format";
-    static final String DEADLINEWRONGLENGTHBUTRIGHTFORMATERROR = "Date is wrongly" +
-            "formatted! Make sure it follows the YYYY-MM-DD format";
-    static final String EVENTWRONGERROR = "Date is wrongly" +
-            "formatted! Make sure it follows the YYYY-MM-DD format";
-    static final String CORRUPTEDFILEERROR = "Corrupted file. Cannot read data";
+    static final String DEADLINE_WRONG_LENGTH_BUT_RIGHT_FORMAT_ERROR = "Date is wrongly" +
+            " formatted! Make sure it follows the YYYY-MM-DD format";
+    static final String EVENT_WRONG_ERROR = "Date is wrongly" +
+            " formatted! Make sure it follows the YYYY-MM-DD format";
+    static final String CORRUPTED_FILE_ERROR = "Corrupted file. Cannot read data";
 
     /**
      * Check if task writer throws an error if to do task uses space as description
@@ -27,7 +27,7 @@ public class TaskWriterTest {
         try {
             TaskWriter.createTask("todo ", new TaskList());
         } catch (Exception e) {
-            assertEquals(TODOEMPTYSPACEERROR, e.toString());
+            assertEquals(TODO_EMPTY_SPACE_ERROR, e.toString());
         }
     }
 
@@ -39,7 +39,7 @@ public class TaskWriterTest {
         try {
             TaskWriter.createTask("todo", new TaskList());
         } catch (Exception e) {
-            assertEquals(TODOEMPTYERROR, e.toString());
+            assertEquals(TO_DO_EMPTY_ERROR, e.toString());
         }
     }
 
@@ -51,7 +51,7 @@ public class TaskWriterTest {
         try {
             TaskWriter.createTask("deadline b /by 2019/02/12", new TaskList());
         } catch (Exception e) {
-            assertEquals(DEADLINEWRONGGFORMATERROR, e.toString());
+            assertEquals(DEADLINE_WRONG_FORMAT_ERROR, e.toString());
         }
     }
 
@@ -64,7 +64,7 @@ public class TaskWriterTest {
         try {
             TaskWriter.createTask("deadline b /by 2019-02-1", new TaskList());
         } catch (Exception e) {
-            assertEquals(DEADLINEWRONGLENGTHBUTRIGHTFORMATERROR, e.toString());
+            assertEquals(DEADLINE_WRONG_LENGTH_BUT_RIGHT_FORMAT_ERROR, e.toString());
         }
     }
 
@@ -76,7 +76,7 @@ public class TaskWriterTest {
         try {
             TaskWriter.createTask("deadline b /by 2019-02-1", new TaskList());
         } catch (Exception e) {
-            assertEquals(EVENTWRONGERROR, e.toString());
+            assertEquals(EVENT_WRONG_ERROR, e.toString());
         }
     }
 
@@ -89,7 +89,7 @@ public class TaskWriterTest {
         try {
             TaskWriter.createSavedTask("todo ", new TaskList());
         } catch (Exception e) {
-            assertEquals(CORRUPTEDFILEERROR, e.toString());
+            assertEquals(CORRUPTED_FILE_ERROR, e.toString());
         }
     }
 
@@ -102,7 +102,7 @@ public class TaskWriterTest {
         try {
             TaskWriter.createSavedTask("todo", new TaskList());
         } catch (Exception e) {
-            assertEquals(CORRUPTEDFILEERROR, e.toString());
+            assertEquals(CORRUPTED_FILE_ERROR, e.toString());
         }
     }
 
@@ -115,7 +115,7 @@ public class TaskWriterTest {
         try {
             TaskWriter.createSavedTask("deadline b /by 2019/02/12", new TaskList());
         } catch (Exception e) {
-            assertEquals(CORRUPTEDFILEERROR, e.toString());
+            assertEquals(CORRUPTED_FILE_ERROR, e.toString());
         }
     }
 
@@ -128,7 +128,7 @@ public class TaskWriterTest {
         try {
             TaskWriter.createSavedTask("deadline b /by 2019-02-1", new TaskList());
         } catch (Exception e) {
-            assertEquals(CORRUPTEDFILEERROR, e.toString());
+            assertEquals(CORRUPTED_FILE_ERROR, e.toString());
         }
     }
 
@@ -141,7 +141,7 @@ public class TaskWriterTest {
         try {
             TaskWriter.createSavedTask("deadline b /by 2019-02-1", new TaskList());
         } catch (Exception e) {
-            assertEquals(CORRUPTEDFILEERROR, e.toString());
+            assertEquals(CORRUPTED_FILE_ERROR, e.toString());
         }
     }
 }
