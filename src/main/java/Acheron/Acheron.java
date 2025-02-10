@@ -34,12 +34,4 @@ public class Acheron {
     public static void setMessage(String msg) {
         message = msg;
     }
-
-    /**
-     * A method that is alwways run when the class is run
-     * @param args args supplied to the class if any
-     */
-    public static void main(String[] args) {
-        new Acheron("./data/duke.txt");
-    }
 }

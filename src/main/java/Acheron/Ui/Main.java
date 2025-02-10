@@ -11,7 +11,7 @@ import java.io.IOException;
 
 
 public class Main extends Application {
-    private Acheron acheron = new Acheron("./data/duke.txt");
+    private Acheron acheron = new Acheron("./data/acheron.txt");
 
     @Override
     public void start(Stage stage) {
