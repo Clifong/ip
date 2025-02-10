@@ -11,12 +11,18 @@ public class TaskWriterTest {
             "Make sure the text follows the format\n" +
             "todo [Some text]\n" +
             "(Note that the [ ] is not needed! E.g todo eat peach";
-    static final String DEADLINE_WRONG_FORMAT_ERROR = "Date is wrongly formatted!" +
-            " Make sure it follows the YYYY-MM-DD format";
-    static final String DEADLINE_WRONG_LENGTH_BUT_RIGHT_FORMAT_ERROR = "Date is wrongly" +
-            " formatted! Make sure it follows the YYYY-MM-DD format";
-    static final String EVENT_WRONG_ERROR = "Date is wrongly" +
-            " formatted! Make sure it follows the YYYY-MM-DD format";
+    static final String DEADLINE_WRONG_FORMAT_ERROR = "Date is wrongly"
+            + " formatted or start and end date is inconsistent!"
+            + " Make sure it follows the YYYY-MM-DD format and start date is"
+            + " always less than or equal to end date";
+    static final String DEADLINE_WRONG_LENGTH_BUT_RIGHT_FORMAT_ERROR = "Date is wrongly"
+            + " formatted or start and end date is inconsistent!"
+            + " Make sure it follows the YYYY-MM-DD format and start date is"
+            + " always less than or equal to end date";
+    static final String EVENT_WRONG_ERROR = "Date is wrongly"
+            + " formatted or start and end date is inconsistent!"
+            + " Make sure it follows the YYYY-MM-DD format and start date is"
+            + " always less than or equal to end date";
     static final String CORRUPTED_FILE_ERROR = "Corrupted file. Cannot read data";
 
     /**

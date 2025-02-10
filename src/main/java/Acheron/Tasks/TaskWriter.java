@@ -1,6 +1,13 @@
 package Acheron.Tasks;
 
-import Acheron.Exceptions.*;
+import java.time.LocalDate;
+
+import Acheron.Exceptions.BadDateExceptions;
+import Acheron.Exceptions.CorruptedFileException;
+import Acheron.Exceptions.DeadlineExceptions;
+import Acheron.Exceptions.EventExceptions;
+import Acheron.Exceptions.GenericExceptions;
+import Acheron.Exceptions.ToDoExceptions;
 
 /**
  * A class that does work to extract the required information out of any input
@@ -48,14 +55,15 @@ public class TaskWriter {
             try {
                 String taskWithDate = input.substring(input.indexOf(' ') + 1, input.length());
                 String taskName = taskWithDate.substring(0, taskWithDate.indexOf("/from") - 1);
-                String from = taskWithDate.substring(taskWithDate.indexOf("from") + 5, taskWithDate.indexOf("/to") - 1);
-                String to = taskWithDate.substring(taskWithDate.indexOf("to") + 3, taskWithDate.length());
-                if (!isValidDate(from) || !isValidDate(to)) {
+                String startDate = taskWithDate.substring(taskWithDate.indexOf("from") + 5,
+                        taskWithDate.indexOf("/to") - 1);
+                String endDate = taskWithDate.substring(taskWithDate.indexOf("to") + 3, taskWithDate.length());
+                if (!isValidDate(startDate) || !isValidDate(endDate) || !isValidStartAndEndDate(startDate, endDate)) {
                     throw new BadDateExceptions();
                 }
-                assert from.length() == 10;
-                assert to.length() == 10;
-                newTask = new Events(taskName, false, from, to);
+                assert startDate.length() == 10;
+                assert endDate.length() == 10;
+                newTask = new Events(taskName, false, startDate, endDate);
             } catch (BadDateExceptions e) {
                 throw e;
             }
@@ -88,6 +96,31 @@ public class TaskWriter {
     }
 
     /**
+     * A utility method to check if the start date is less than end date
+     * @param startDate is the start date of event
+     * @param endDate is the end date of event
+     * @return True is the start date is before, or is the end date. Otherwise no
+     */
+    private static boolean isValidStartAndEndDate(String startDate, String endDate) {
+        try {
+            LocalDate startDateObject = LocalDate.parse(startDate);
+            LocalDate endDateObject = LocalDate.parse(endDate);
+            if (startDateObject.getYear() < endDateObject.getYear()) {
+                return true;
+            } else if (startDateObject.getYear() == endDateObject.getYear()) {
+                if (startDateObject.getMonth().getValue() < endDateObject.getMonth().getValue()) {
+                    return true;
+                } else if (startDateObject.getMonth().getValue() == endDateObject.getMonth().getValue()) {
+                    return startDateObject.getDayOfMonth() <= endDateObject.getDayOfMonth();
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
      * A method to create a task from the saved file
      * @param input A text from the saved file
      * @param taskList A task list object
@@ -101,12 +134,12 @@ public class TaskWriter {
             if (split[0].equals("T")) {
                 taskList.addTaskFromStorage(new ToDos(taskName, isDone));
             } else if (split[0].equals("D")) {
-                String by = split[3];
-                taskList.addTaskFromStorage(new Deadline(taskName, isDone, by));
+                String endDate = split[3];
+                taskList.addTaskFromStorage(new Deadline(taskName, isDone, endDate));
             } else if (split[0].equals("E")) {
-                String from = split[3];
-                String to = split[4];
-                taskList.addTaskFromStorage(new Events(taskName, isDone, from, to));
+                String startDate = split[3];
+                String endDate = split[4];
+                taskList.addTaskFromStorage(new Events(taskName, isDone, startDate, endDate));
             } else {
                 throw new CorruptedFileException();
             }

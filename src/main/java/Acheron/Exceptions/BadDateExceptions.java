@@ -11,6 +11,8 @@ public class BadDateExceptions extends GenericExceptions {
      */
     @Override
     public String toString() {
-        return "Date is wrongly formatted! Make sure it follows the YYYY-MM-DD format";
+        return "Date is wrongly formatted or start and end date is inconsistent!"
+                + " Make sure it follows the YYYY-MM-DD format and start date is"
+                + " always less than or equal to end date";
     }
 }
