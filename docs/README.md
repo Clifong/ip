@@ -1,23 +1,21 @@
-# Duke User Guide
+# Acheron User Guide
 
-// Update the title above to match the actual product name
+![Acheron screenshot](Ui.png)
 
-// Product screenshot goes here
-
-// Product intro goes here
+Utility chatbot to add tasks. These tasks are
+1. todo: A task you want to do
+2. deadline: A task with a deadline
+3. event: A task with a start and end date
 
 ## Adding deadlines
+As mentioned, a deadline is a task with a due date.
 
-// Describe the action and its outcome.
+You can add it to the Acheron chatbot.
 
-// Give examples of usage
-
-Example: `keyword (optional arguments)`
-
-// A description of the expected outcome goes here
+Example: `deadline kill IX /by 2099-01-12`
 
 ```
-expected output
+[D][] kill IX (by 
 ```
 
 ## Feature ABC
