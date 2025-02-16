@@ -3,8 +3,7 @@ package Acheron.Tasks;
 import Acheron.Exceptions.TaskExceptions;
 
 /**
- * Abstratc class for all tasks which contain the minimal fields and methods
- * subclass habe
+ * Abstrat class for all tasks which contain the minimal fields and methods
  */
 public abstract class Task {
     private boolean isDone;
@@ -39,21 +38,21 @@ public abstract class Task {
     }
 
     /**
-     * A method to mark that a task is done
+     * Marks a task as done
      */
     public void mark() {
         this.isDone = true;
     }
 
     /**
-     * A method to unmark an already done task
+     * Unmarks an already done task as undone
      */
     public void unmark() {
         this.isDone = false;
     }
 
     /**
-     * Used to generate the string content of the task for saving
+     * Generates the string content of the task for saving
      * @param isLast Indicates if the task is the last task in the task list object. Needed so the
      *             file writer does not add an unnecessary new line which can cause file corruption
      * @return The content of the task

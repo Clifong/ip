@@ -4,10 +4,7 @@ import java.time.LocalDate;
 
 import Acheron.Exceptions.BadDateExceptions;
 import Acheron.Exceptions.CorruptedFileException;
-import Acheron.Exceptions.DeadlineExceptions;
-import Acheron.Exceptions.EventExceptions;
 import Acheron.Exceptions.GenericExceptions;
-import Acheron.Exceptions.ToDoExceptions;
 
 /**
  * A class that does work to extract the required information out of any input
@@ -19,57 +16,33 @@ public class TaskWriter {
      * Creates a task
      * @param input The text input by the user
      * @param taskList The task list object
-     * @throws Exception Throws any errors that occur in some of the usbmethods
+     * @throws GenericExceptions Throws any errors that occur in some of the usbmethods
      */
-    public static void createTask(String input, TaskList taskList) throws Exception {
-        //Generic adding of tasls
-        Task newTask = null;
+    public static void createTask(String input, TaskList taskList) throws GenericExceptions {
+        Task newTask;
         input = input.strip();
         if (input.contains("todo")) {
-            try {
-                if (input.equals("todo")) {
-                    throw new ToDoExceptions();
-                }
-                String taskName = input.substring(input.indexOf(" ") + 1, input.length());
-                newTask = new ToDos(taskName, false);
-            } catch (Exception e) {
-                throw new ToDoExceptions();
-            }
+            String taskName = input.substring(input.indexOf(" ") + 1, input.length());
+            newTask = new ToDos(taskName, false);
         } else if (input.contains("deadline")) {
-            try {
-                String taskWithDate = input.substring(input.indexOf(' ') + 1, input.length());
-                String taskName = taskWithDate.substring(0, taskWithDate.indexOf("/by") - 1);
-                String deadline = taskWithDate.substring(taskWithDate.indexOf("by") + 3, taskWithDate.length());
-                if (!isValidDate(deadline)) {
-                    throw new BadDateExceptions();
-                }
-                assert deadline.length() == 10;
-                newTask = new Deadline(taskName, false, deadline);
-            } catch (BadDateExceptions e) {
-                throw e;
-            }
-            catch (Exception e) {
-                throw new DeadlineExceptions();
-            }
+            String taskWithDate = input.substring(input.indexOf(' ') + 1, input.length());
+            String taskName = taskWithDate.substring(0, taskWithDate.indexOf("/by") - 1);
+            String deadline = taskWithDate.substring(taskWithDate.indexOf("by") + 3, taskWithDate.length());
+            checkalidDate(deadline);
+            assert deadline.length() == 10;
+            newTask = new Deadline(taskName, false, deadline);
         } else if (input.contains("event")) {
-            try {
-                String taskWithDate = input.substring(input.indexOf(' ') + 1, input.length());
-                String taskName = taskWithDate.substring(0, taskWithDate.indexOf("/from") - 1);
-                String startDate = taskWithDate.substring(taskWithDate.indexOf("from") + 5,
-                        taskWithDate.indexOf("/to") - 1);
-                String endDate = taskWithDate.substring(taskWithDate.indexOf("to") + 3, taskWithDate.length());
-                if (!isValidDate(startDate) || !isValidDate(endDate) || !isValidStartAndEndDate(startDate, endDate)) {
-                    throw new BadDateExceptions();
-                }
-                assert startDate.length() == 10;
-                assert endDate.length() == 10;
-                newTask = new Events(taskName, false, startDate, endDate);
-            } catch (BadDateExceptions e) {
-                throw e;
-            }
-            catch (Exception e) {
-                throw new EventExceptions();
-            }
+            String taskWithDate = input.substring(input.indexOf(' ') + 1, input.length());
+            String taskName = taskWithDate.substring(0, taskWithDate.indexOf("/from") - 1);
+            String startDate = taskWithDate.substring(taskWithDate.indexOf("from") + 5,
+                    taskWithDate.indexOf("/to") - 1);
+            String endDate = taskWithDate.substring(taskWithDate.indexOf("to") + 3, taskWithDate.length());
+            checkalidDate(startDate);
+            checkalidDate(endDate);
+            checkValidStartAndEndDate(startDate, endDate);
+            assert startDate.length() == 10;
+            assert endDate.length() == 10;
+            newTask = new Events(taskName, false, startDate, endDate);
         } else {
             throw new GenericExceptions();
         }
@@ -77,56 +50,53 @@ public class TaskWriter {
     }
 
     /**
-     * A utility method to check if the date in the input is correctly formatted
-     * @param date A date we are checking
-     * @return True if the date is correctly formatted. Otherwise false
+     * Checks if the date in the input is correctly formatted
+     * @param date to be checked
+     * @throws BadDateExceptions if date in valid
      */
-    private static boolean isValidDate(String date) {
+    private static void checkalidDate(String date) throws BadDateExceptions {
         if (!date.contains("-")) {
-            return false;
+            throw new BadDateExceptions();
         }
         String[] split = date.split("-");
         if (split.length != 3) {
-            return false;
+            throw new BadDateExceptions();
         }
         if (split[0].length() != 4 || split[1].length() != 2 || split[2].length() != 2) {
-            return false;
+            throw new BadDateExceptions();
         }
-        return true;
     }
 
     /**
-     * A utility method to check if the start date is less than end date
-     * @param startDate is the start date of event
-     * @param endDate is the end date of event
-     * @return True is the start date is before, or is the end date. Otherwise no
+     * Checks if the start date is less than end date
+     * @param startDate is the start of the event
+     * @param endDate isthe end of the event
+     * @throws BadDateExceptions if start date is larger than end date
      */
-    private static boolean isValidStartAndEndDate(String startDate, String endDate) {
-        try {
-            LocalDate startDateObject = LocalDate.parse(startDate);
-            LocalDate endDateObject = LocalDate.parse(endDate);
-            if (startDateObject.getYear() < endDateObject.getYear()) {
-                return true;
-            } else if (startDateObject.getYear() == endDateObject.getYear()) {
-                if (startDateObject.getMonth().getValue() < endDateObject.getMonth().getValue()) {
-                    return true;
-                } else if (startDateObject.getMonth().getValue() == endDateObject.getMonth().getValue()) {
-                    return startDateObject.getDayOfMonth() <= endDateObject.getDayOfMonth();
+    private static void checkValidStartAndEndDate(String startDate, String endDate) throws BadDateExceptions {
+        LocalDate startDateObject = LocalDate.parse(startDate);
+        LocalDate endDateObject = LocalDate.parse(endDate);
+        if (startDateObject.getYear() < endDateObject.getYear()) {
+            return;
+        } else if (startDateObject.getYear() == endDateObject.getYear()) {
+            if (startDateObject.getMonth().getValue() < endDateObject.getMonth().getValue()) {
+                return;
+            } else if (startDateObject.getMonth().getValue() == endDateObject.getMonth().getValue()) {
+                if (startDateObject.getDayOfMonth() <= endDateObject.getDayOfMonth()) {
+                    return;
                 }
             }
-            return false;
-        } catch (Exception e) {
-            return false;
         }
+        throw new BadDateExceptions();
     }
 
     /**
-     * A method to create a task from the saved file
+     * Creates a task from the saved file
      * @param input A text from the saved file
      * @param taskList A task list object
-     * @throws Exception Throws any errors that occur in some of the usbmethods
+     * @throws CorruptedFileException Throws a exception if something went wrong
      */
-    public static void createSavedTask(String input, TaskList taskList) throws Exception {
+    public static void createSavedTask(String input, TaskList taskList) throws CorruptedFileException {
         try {
             String[] split = input.split("\\|");
             boolean isDone = split[1].equals("X");

@@ -6,7 +6,7 @@ package Acheron.Exceptions;
 public class BadDateExceptions extends GenericExceptions {
 
     /**
-     * Override the toString() method so a custom error message is printed out if needed
+     * Overrides the toString() method so a custom error message is printed out if needed
      * @return Custom string message
      */
     @Override

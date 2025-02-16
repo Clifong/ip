@@ -7,7 +7,7 @@ package Acheron.CommandInfo;
  */
 public class EventCommandInfo extends GenericCommandInfo {
     /**
-     * Override the toString() method so a custom message is printed out
+     * Overrides the toString() method so a custom message is printed out
      * @return Custom string message
      */
     @Override

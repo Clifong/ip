@@ -7,7 +7,7 @@ package Acheron.Exceptions;
 public class DeadlineExceptions extends GenericExceptions {
 
     /**
-     * Override the toString() method so a custom error message is printed out if neede
+     * Overrides the toString() method so a custom error message is printed out if needes
      * @return Custom string message
      */
     @Override

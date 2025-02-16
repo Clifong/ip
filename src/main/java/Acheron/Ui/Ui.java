@@ -11,7 +11,7 @@ public class Ui {
             + "________________________________________________________";
 
     /**
-     * A method used to display the text on the terminal or in the UI
+     * Displays the text on the terminal or in the UI
      * @param text The text to be shown
      */
     public static void displayText(String text) {

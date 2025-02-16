@@ -1,6 +1,15 @@
 package Acheron.Utility;
 
-import Acheron.CommandInfo.*;
+import Acheron.CommandInfo.ByeCommandInfo;
+import Acheron.CommandInfo.DeadlineCommandInfo;
+import Acheron.CommandInfo.DeleteCommandInfo;
+import Acheron.CommandInfo.EventCommandInfo;
+import Acheron.CommandInfo.FindCommandInfo;
+import Acheron.CommandInfo.GenericCommandInfo;
+import Acheron.CommandInfo.ListCommandInfo;
+import Acheron.CommandInfo.MarkCommandInfo;
+import Acheron.CommandInfo.ToDoCommandInfo;
+import Acheron.CommandInfo.UnmarkCommandInfo;
 import Acheron.Storage.StorageManager;
 import Acheron.Tasks.TaskList;
 import Acheron.Tasks.TaskWriter;
@@ -10,7 +19,7 @@ import Acheron.Ui.Ui;
  * A utility class used to parse the user's input correctly
  */
 public class CommandParser {
-    private static GenericCommandInfo[] ALL_COMMANDS_IFNO = {
+    private static GenericCommandInfo[] ALL_COMMANDS_INFO = {
         new ListCommandInfo(),
         new MarkCommandInfo(),
         new UnmarkCommandInfo(),
@@ -88,7 +97,7 @@ public class CommandParser {
             if (input.contains("help")) {
                 StringBuilder output = new StringBuilder();
                 output.append("Here are all the commands supported:\n");
-                for (GenericCommandInfo commandInfo : ALL_COMMANDS_IFNO) {
+                for (GenericCommandInfo commandInfo : ALL_COMMANDS_INFO) {
                     output.append(commandInfo);
                 }
                 Ui.displayText(output.toString());

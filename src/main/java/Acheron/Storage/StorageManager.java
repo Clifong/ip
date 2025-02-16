@@ -56,7 +56,7 @@ public class StorageManager {
 
 
     /**
-     * Update the saved file with all the existing task's contents
+     * Updates the saved file with all the existing task's contents
      * @param taskList The task list object contains all existing tasks
      * @throws Exception Throws any exception picked up in any sub methods
      */

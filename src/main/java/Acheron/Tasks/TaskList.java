@@ -34,7 +34,7 @@ public class TaskList {
     }
 
     /**
-     * Remove the ith task
+     * Removes the ith task
      * @param i The position of the task in the array list
      */
     public void removeTask(int i) throws Exception {
@@ -52,7 +52,7 @@ public class TaskList {
     }
 
     /**
-     * Mark the ith task
+     * Marks the ith task
      * @param i The position of the task in the array list
      */
     public void markTask(int i) {
@@ -61,7 +61,7 @@ public class TaskList {
     }
 
     /**
-     * Unmark the ith task
+     * Unmarks the ith task
      * @param i The position of the task in the array list
      */
     public void unmarkTask(int i) {
@@ -87,7 +87,7 @@ public class TaskList {
     }
 
     /**
-     * Used to extract out all the contents of the existing tasks
+     * Extracts out all the contents of the existing tasks
      * @return All the contents of the existing tasks
      */
     public String getAllTasksContent() {
@@ -100,7 +100,7 @@ public class TaskList {
     }
 
     /**
-     * Find all tasks with the same keyword
+     * Finds all tasks with the same keyword
      * @param keyword The keyword we are interested
      */
     public void findAllTaskWithKeyword(String keyword) {
